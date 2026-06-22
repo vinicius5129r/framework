@@ -4,6 +4,9 @@
 class Rota {
     // Construtor da classe Rota
     private $controlador = "Paginas"; // Definindo a propriedade controlador com o valor "Paginas"
+    private $metodo = "index"; // Definindo a propriedade metodo com o valor "index"
+    private $parametros = []; // Definindo a propriedade parametros como um array vazio
+
      public function __construct() {
         $url = $this->url(); // Obtendo a URL atual usando o método url()
         if (file_exists('../app/Controllers'.ucwords($url[0].'.php'))) {
@@ -12,6 +15,14 @@ class Rota {
         }
         require_once '../app/Controllers/'.$this->controlador.'.php'; // Incluindo o arquivo do controlador correspondente
             $this->controlador = new $this->controlador; // Criando uma instância do controlador
+            if (isset($url[1])) {
+                if (method_exists($this->controlador, $url[1])) {
+                    $this->metodo = $url[1]; // Atualizando a propriedade metodo com o valor da URL
+                    unset($url[1]); // Removendo o segundo elemento da URL para evitar conflitos
+                } // fim do if verifica se o método existe no controlador
+            } // fim do if verifica se o segundo elemento da URL está definido
+            $this->parametros = $url ? array_values($url) : []; // Atualizando a propriedade parametros com os valores restantes da URL
+             call_user_func_array([$this->controlador, $this->metodo], $this->parametros); // Chamando o método do controlador com os parâmetros usando call_user_func_array
         var_dump($this); // Exibindo o conteúdo do objeto Rota para verificar se a classe está funcionando corretamente
     }
 
@@ -27,9 +38,6 @@ class Rota {
             $url = explode('/', $url); // Dividindo a URL em partes usando '/' como delimitador
             return $url; // Retornando a URL atual se estiver definida
         }// fim do if
-
-        // Código para obter a URL atual
-        echo $_GET['url'];
     }
 }
 ?>

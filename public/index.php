@@ -1,6 +1,7 @@
 <?php
-// Incluindo o arquivo da classe Rota para garantir que ela esteja disponível
-include_once '../app/Libraries/Rota.php';
+// include dos arquivos necessários para o funcionamento do framework
+include '../app/Libraries/Rota.php';
+include '../app/Libraries/Controller.php';
 ?>
 <!DOCTYPE html>
 <html lang="pt_BR">
