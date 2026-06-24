@@ -1,12 +1,13 @@
 <?php
+// classe responsável por carregar o controller, método e parâmetros
 class Rota{
    private $controlador = "Paginas";
    private $metodo = 'index';
    private $parametros = [];
-
+   //método construtor da classe
    public function __construct(){
-   
-   $url = $this->url()? $this->url():[0];
+   //echo "chamando o construtor da classe Rota";
+   $url = $this->url()? $this->url():[0]; // verifica se a url existe, caso não exista atribui o valor 0
    if(file_exists('../app/Controllers/'.ucwords($url[0]).'.php')){
     $this->controlador = ucwords($url[0]);
       unset($url[0]);

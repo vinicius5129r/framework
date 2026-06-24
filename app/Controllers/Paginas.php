@@ -2,11 +2,13 @@
 
 class Paginas extends Controller{
     public function index(){
-        $this->view('paginas/home');
+        $dados = ['titulo' => "Página Inicial", 'descricao' => "Aula de PW com 3º matutino, php orientado a objetos"];
+        $this->view('paginas/home', $dados);
     }//fim da função index
 
-    public function sobre($id){
-    echo $id. "<hr>";
+    public function sobre(){
+        $dados = ['titulo' => "Página Sobre nós", 'descricao' => "Aqui você encontra as noticias mais recentes sobre a nossa empresa"];
+        $this->view('paginas/sobre', $dados);
     }//fim da função sobre
 
 }//fim da classe Paginas
