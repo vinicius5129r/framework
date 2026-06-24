@@ -1,10 +1,9 @@
 <?php
-// include dos arquivos necessários para o funcionamento do framework
 include '../app/Libraries/Rota.php';
 include '../app/Libraries/Controller.php';
 ?>
 <!DOCTYPE html>
-<html lang="pt_BR">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,10 +11,8 @@ include '../app/Libraries/Controller.php';
 </head>
 <body>
     <?php
-    // Criando uma instância da classe Rota para testar a inclusão do arquivo
-    $rota = new Rota();
-    // Chamando o método url para verificar se a classe está funcionando corretamente
-    //$rota->url();
+    $rotas = new Rota();
+   // $rotas->url();
     ?>
 </body>
 </html>
