@@ -8,15 +8,17 @@ include '../app/Libraries/Controller.php';
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?= APP_NAME ?></title>
-    <link rel="stylesheet" href="<?= URL ?>/public/bootstrap/css/bootstrap.min.css">
-    <script src="<?= URL ?>/public/bootstrap/js/bootstrap.min.js"></script>
+    <title><?= APP_NAME ?> </title>
+    
+    <link rel="stylesheet" href="<?=URL?>/public/bootstrap/css/bootstrap.min.css"/>
+    <script src="<?=URL?>/public/boostrap/js/bootstrap.min.js"></script>
 </head>
 <body>
     <?php
-    include '../app/Views/header.php';
+    include '../app/views/header.php';
     $rotas = new Rota();
-    include '../app/Views/footer.php';
+    include '../app/views/footer.php';
+   // $rotas->url();
     ?>
 </body>
 </html>

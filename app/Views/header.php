@@ -1,7 +1,7 @@
 <header class="bg-dark">
     <div class="container">
         <nav class="navbar navbar-expand-sm navbar-dark position-relative">
-            <a class="navbar-brand" href="<?= URL ?>">LOGO</a>
+            <a class="navbar-brand" href="<?=URL?>">LOGO</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -10,10 +10,13 @@
                 <!-- Menu alinhado à esquerda -->
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="<?= URL ?>" data-tooltip="tooltip" title="Página Inicial">Home</a>
+                        <a class="nav-link" href="<?=URL?>" data-tooltip="tooltip" title="Página Inicial">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="<?= URL?>/paginas/sobre" data-tooltip="tooltip" title="Sobre nós">Sobre nós</a>
+                        <a class="nav-link" href="<?=URL?>/paginas/sobre" data-tooltip="tooltip" title="Sobre nós">Sobre nós</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="<?=URL?>/paginas/contato" data-tooltip="tooltip" title="contato">Contato</a>
                     </li>
                 </ul>
             </div>
