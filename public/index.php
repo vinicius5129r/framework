@@ -3,6 +3,43 @@ include '../app/configuracao.php';
 include '../app/Libraries/Rota.php';
 include '../app/Libraries/Controller.php';
 include '../app/Libraries/Database.php';
+$db = new Database();
+$id = 2;
+$db->query("DELETE FROM posts WHERE id = :id");
+$db->bind(":id",$id);
+$db->executa();
+echo '<hr>Total Resultados: '.$db->totalResultados();
+/*
+date_default_timezone_set('America/Cuiaba');
+$id = 2;
+$usuario_id = 100;
+$titulo = 'Titulo editado';
+$texto = 'Texto editado';
+$criadoEm = date('Y-m-d H:i:s');
+$db->query("UPDATE posts SET usuario_id = :usuario_id, titulo = :titulo, texto = :texto, criado_em = :criadoEm WHERE id = :id");
+$db->bind(":usuario_id",$usuario_id);
+$db->bind(":titulo",$titulo);
+$db->bind(":texto",$texto);
+$db->bind(":criadoEm",$criadoEm);
+$db->bind(":id",$id);
+$db->executa();
+echo '<hr>Total Resultados: '.$db->totalResultados();
+
+//inserindo dados no banco
+$usuario_id = 8;
+$titulo = 'Programação';
+$texto = 'Programação web';
+
+$db->query("INSERT INTO posts (usuario_id, titulo, texto) VALUES (:usuario_id, :titulo, :texto)");
+$db->bind(":usuario_id",$usuario_id);
+$db->bind(":titulo",$titulo);
+$db->bind(":texto",$texto);
+
+$db->executa();
+
+echo '<hr>Total Resultados: '.$db->totalResultados();
+echo '<hr>Ultimo ID inserido'.$db->ultimoIdInserido();
+*/
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
