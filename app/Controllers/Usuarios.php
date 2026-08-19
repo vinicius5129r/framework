@@ -77,4 +77,43 @@ class Usuarios extends Controller{
         $this->view('usuarios/cadastrar', $dados);
     }
 
+    public function login(){
+        $formulario = filter_input_array(INPUT_POST, FILTER_SANITIZE_SPECIAL_CHARS);
+        if(isset($formulario)):
+            $dados = [
+                'email' => trim($formulario['email']),
+                'senha' => trim($formulario['senha']),
+                'email_erro' => '',
+                'senha_erro' => ''
+            ];
+            if(in_array("", $formulario)):
+                if(empty($formulario['email'])):
+                    $dados['email_erro'] = 'Preencha o campo e-mail';
+                endif;
+                if(empty($formulario['senha'])):
+                    $dados['senha_erro'] = 'Preencha o campo senha';
+                endif;
+            else:
+                if(Checa::checarEmail($formulario['email'])):
+                    $dados['email_erro'] = 'O e-mail informado é invalido';
+                else:
+                    $usuairio = $this->usuarioModel->checarLogin($formulario['email'], $formulario['senha']);
+                    if($usuairio):
+                        $this->criarSessaoUsuario($usuairio);
+                    else:
+                        echo "Não foi possivel logar, verifique o e-mail e senha";
+                    endif;
+                endif;
+            endif;
+        else:
+            $dados = [
+                'email' => '',
+                'senha' => '',
+                'email_erro' => '',
+                'senha_erro' => ''
+            ];
+        endif;
+        $this->view('usuarios/login');
+    }
+
 }//fim da classe Usuario
