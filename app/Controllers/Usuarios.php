@@ -1,4 +1,5 @@
 <?php
+
 class Usuarios extends Controller{
 
  public function __construct()
@@ -51,7 +52,8 @@ class Usuarios extends Controller{
                     $dados['senha'] = password_hash($formulario['senha'], PASSWORD_DEFAULT);
 
                     if ($this->usuarioModel->armazenar($dados)) :
-                        echo 'cadastro realizado com sucesso';
+                        Sessao::mensagem('usuario', 'Cadastro realizado com sucesso');
+                        ;
                     else :
                         die("Erro ao armazenar usuario no banco de dados");
                     endif;
@@ -101,7 +103,7 @@ class Usuarios extends Controller{
                     if($usuairio):
                         $this->criarSessaoUsuario($usuairio);
                     else:
-                        echo "Não foi possivel logar, verifique o e-mail e senha";
+                        Sessao::mensagem('usuario', 'Usuario ou senha incorretos', 'alert alert-danger');
                     endif;
                 endif;
             endif;
@@ -114,6 +116,22 @@ class Usuarios extends Controller{
             ];
         endif;
         $this->view('usuarios/login');
-    }
+    }// fim do metodo login
+
+    function criarSessaoUsuario($usuario){
+        $_SESSION['usuario_id'] = $usuario->id;
+        $_SESSION['usuario_nome'] = $usuario->nome;
+        $_SESSION['usuario_email'] = $usuario->email;
+        Url::redirecionar('posts');
+    }//fim do metodo criarSessaoUsuario
+
+    public function sair(){
+        unset($_SESSION['usuario_id']);
+        unset($_SESSION['usuario_nome']);
+        unset($_SESSION['usuario_email']);
+        session_destroy();
+        Url::redirecionar('usuarios/login');
+    }//fim do metodo sair
+
 
 }//fim da classe Usuario
