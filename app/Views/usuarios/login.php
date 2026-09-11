@@ -1,13 +1,14 @@
 <div class="col-xl-4 col-md-6 mx-auto p-5">
     <div class="card">
         <div class="card-header">
-            <h3 class="card-title text-center">Login</h3>
+            Login
         </div>
         <div class="card-body">
             <?=Sessao::mensagem('usuario')?>
-            <p class="card-text"><small class="text-muted">Preecha o formulário abaixo para fazer seu login</small></p>
+            <p class="card-text"><small class="text-muted">Faça o seu login no sistema</small></p>
 
-            <form name="login" method="POST" action="<?= URL ?>/usuarios/login" class="mt-4">
+            <form name="logar" method="POST" action="<?= URL ?>/usuarios/login" class="mt-4">
+            
                 <div class="form-group">
                     <label for="email">E-mail: <sup class="text-danger">*</sup></label>
                     <input type='email' name='email' id='email'  class='form-control <?= $dados['email_erro'] ? 'is-invalid' : '' ?>'>
@@ -22,13 +23,13 @@
                         <?= $dados['senha_erro'] ?>
                     </div>
                 </div>
-
+               
                 <div class="row">
                     <div class="col">
-                        <input type="submit" value="Fazer Login" class="btn btn-info btn-block">
+                        <input type="submit" value="Logar" class="btn btn-info btn-block">
                     </div>
                     <div class="col">
-                        <a href="<?=URL?>/usuarios/cadastrar">Não tem uma conta? Cadastre-se</a>
+                        <a href="<?=URL?>/usuarios/cadastrar">Você não tem uma conta? Faça o seu cadastro</a>
                     </div>
                 </div>
 

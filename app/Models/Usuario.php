@@ -50,4 +50,7 @@ class Usuario
             return false;
         endif;
     }
+    
+   
+
 }
