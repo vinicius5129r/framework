@@ -1,7 +1,7 @@
 <div class="col-md-8 mx-auto p-5">
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="<?= URL ?>/posts">Posts</a></li>
+            <li class="breadcrumb-item"><a href="<?=URL?>/posts">Posts</a></li>
             <li class="breadcrumb-item active" aria-current="page">Editar</li>
         </ol>
     </nav>
@@ -10,8 +10,8 @@
             Editar Post
         </div>
         <div class="card-body bg-light">
-            <form name="editar" method="post" action="<?= URL ?>/posts/editar/<?= $dados['id'] ?>" class="mt-4">
-                <div class="form-group">
+            <form name="editar" method="post" action="<?=URL?>/posts/editar/<?=$dados['id']?>" class="mt-4">
+                 <div class="form-group">
                     <label for="titulo">Titulo: <sup class="text-danger">*</sup></label>
                     <input type="text" name="titulo" id="titulo" value="<?= $dados['titulo'] ?>" class="form-control <?= $dados['titulo_erro'] ? 'is-invalid' : '' ?>">
                     <div class="invalid-feedback">

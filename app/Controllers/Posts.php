@@ -56,7 +56,8 @@ class Posts extends Controller{
 
         $this->view('posts/cadastrar', $dados);
     }
-      public function ver($id){
+      public function ver($id)
+    {
         $post = $this->postModel->lerPostPorId($id);
         $usuario = $this->usuarioModel->lerUsuarioPorId($post->usuario_id);
 
@@ -66,58 +67,71 @@ class Posts extends Controller{
         ];
 
         $this->view('posts/ver', $dados);
-    }//fim da função ver
-
+    }
     public function deletar($id){
         $id = (int) $id;
-        if(is_int($id)):
-            if($this->postModel->destruir($id)):
-                Sessao::mensagem('post', 'Post deletado com sucesso!');
-                URL::redirecionar('posts');
-            else:
-                die("Erro ao apagar o Post");
-            endif;
+        $post = $this->postModel->lerPostPorId($id);
+        if($post->usuario_id != $_SESSION['usuario_id']):
+            Sessao::mensagem('post','Você não tem autorização para excluir esse Post', 'alert alert-danger');
+            URL::redirecionar('posts');
+            return;
         endif;
-    }//fim da função deletar
+        if($this->postModel->destruir($id)):
+            Sessao::mensagem('post', 'Post deletado com sucesso!');
+            URL::redirecionar('posts');
+            else:
+            die("Erro ao apagar o Post");
+        endif;
+    }
+ public function editar($id)
+    {
 
-    public function editar($id){
         $formulario = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
-        if(isset($formulario)):
+        if (isset($formulario)) :
             $dados = [
                 'id' => $id,
                 'titulo' => trim($formulario['titulo']),
                 'texto' => trim($formulario['texto'])
             ];
-            if(in_array("", $formulario)):
-                if(empty($formulario['titulo'])):
+
+            if (in_array("", $formulario)) :
+
+                if (empty($formulario['titulo'])) :
                     $dados['titulo_erro'] = 'Preencha o campo titulo';
                 endif;
-                if(empty($formulario['texto'])):
+
+                if (empty($formulario['texto'])) :
                     $dados['texto_erro'] = 'Preencha o campo texto';
                 endif;
-            else:
-                if($this->postModel->atualizar($dados)):
-                    Sessao::mensagem('post', 'Post atualizado com sucesso!');
+
+            else :
+                if ($this->postModel->atualizar($dados)) :
+                    Sessao::mensagem('post', 'Post atualizado com sucesso');
                     URL::redirecionar('posts');
-                else:
+                else :
                     die("Erro ao atualizar o post");
                 endif;
-            endif;
-        else:
-            $post = $this->postModel->lerPostPorId($id);
-            Sessao::mensagem('post', 'Você não tem autorização para editar esse Post', 'alert alert-danger');
-            URL::redirecionar('posts');
-        endif;
-        $dados = [
-            'id' => $post->id,
-            'titulo' => $post->titulo,
-            'texto' => $post->texto,
-            'titulo_erro' => '',
-            'texto_erro' => ''
-        ];
-    endif;
-    
-        $this->view('posts/editar', $dados);
-    }//fim da função editar
 
+            endif;
+        else :
+
+            $post = $this->postModel->lerPostPorId($id);
+
+            if ($post->usuario_id != $_SESSION['usuario_id']) :
+                Sessao::mensagem('post', 'Você não tem autorização para editar esse Post', 'alert alert-danger');
+                URL::redirecionar('posts');
+            endif;
+
+            $dados = [
+                'id' => $post->id,
+                'titulo' => $post->titulo,
+                'texto' => $post->texto,
+                'titulo_erro' => '',
+                'texto_erro' => ''
+            ];
+
+        endif;
+
+        $this->view('posts/editar', $dados);
+    }
 }//fim da classe Posts
